@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jQiQCI+liGsVQlViYAGfhDZy+AUNGHCP4PiZqZugDxGSMI/TZoLtq4ejq9hF/OkYICGEux/2B++TxALUVRtNmQ==",
+  "dgSpecHash": "0tiev0FHyNZvPsA3ZXkT3sTQP/07RHZ1ytvtukAHGj12L5NdtIAIxGRrzv85QZ/LvElTRJe1RbAWy8l78hTd9g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lord_Hieu\\RiderProjects\\WebApplication3\\WebApplication3\\WebApplication3.csproj",
+  "projectFilePath": "C:\\Users\\Lord_Hieu\\RiderProjects\\CSharp_ASM\\WebApplication3\\WebApplication3\\WebApplication3.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lord_Hieu\\.nuget\\packages\\bogus\\35.6.1\\bogus.35.6.1.nupkg.sha512",
     "C:\\Users\\Lord_Hieu\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

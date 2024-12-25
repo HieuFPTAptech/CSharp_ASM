@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Bogus;
 using WebApplication3.Models;
 
 namespace WebApplication3.Data;
@@ -11,10 +10,10 @@ public class crudDatabaseContext : DbContext
     {
     }
 
-    public DbSet<User> Users { get; set; }
-    public DbSet<Product> Products { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderDetail> OrderDetails { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Rental> Rentals { get; set; }
+    public DbSet<ComicBook> ComicBooks { get; set; }
+    public DbSet<RentalDetail> RentalDetails { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -23,57 +22,25 @@ public class crudDatabaseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<OrderDetail>()
-            .HasKey(od => new { od.OrderId, od.ProductId }); 
+        modelBuilder.Entity<RentalDetail>()
+            .HasKey(rd => rd.RetalDetailID);
 
-        var userFaker = new Faker<User>()
-            .RuleFor(u => u.Id, f => f.IndexFaker + 1)
-            .RuleFor(u => u.Name, f => f.Name.FullName())
-            .RuleFor(u => u.Email, f => f.Internet.Email());
-        var users = userFaker.Generate(3);
+        modelBuilder.Entity<Customer>().HasData(
+            new Customer { CustomerID = 1, FullName = "Nguyen Hung", PhoneNumber = "0123456789", CreateAt = DateTime.Now }
+        );
 
-        var productFaker = new Faker<Product>()
-            .RuleFor(p => p.Id, f => f.IndexFaker + 1)
-            .RuleFor(p => p.Name, f => f.Commerce.ProductName())
-            .RuleFor(p => p.Price, f => f.Random.Decimal(5, 500));
-        var products = productFaker.Generate(30);
+        modelBuilder.Entity<ComicBook>().HasData(
+            new ComicBook { ComicBookID = 1, Title = "Conan", Author = "Aoyama", PricePerDay = 2.5M },
+            new ComicBook { ComicBookID = 2, Title = "Doraemon", Author = "Fujiko", PricePerDay = 1.5M }
+        );
 
-        var orderId = 1;
-        var orderFaker = new Faker<Order>()
-            .RuleFor(o => o.Id, f => orderId++)
-            .RuleFor(o => o.UserId, f => f.PickRandom(users).Id)
-            .RuleFor(o => o.OrderDate, f => f.Date.Recent(30));
-        var orders = orderFaker.Generate(10);
+        modelBuilder.Entity<Rental>().HasData(
+            new Rental { RentalID = 1, CustomerID = 1, RentalDate = new DateTime(2024, 10, 1), ReturnDate = new DateTime(2024, 10, 10), Status = "Completed" }
+        );
 
-        var orderDetails = new List<OrderDetail>();
-        foreach (var order in orders)
-        {
-            var usedProductIds = new HashSet<int>(); // Tập hợp để lưu các ProductId đã dùng cho Order này
-            var detailsCount = new Random().Next(2, 5); // Số lượng OrderDetail cho Order này
-
-            for (int i = 0; i < detailsCount; i++)
-            {
-                int productId;
-                do
-                {
-                    productId = new Random().Next(1, products.Count + 1); // Lấy ngẫu nhiên ProductId
-                } while (usedProductIds.Contains(productId)); // Kiểm tra nếu đã sử dụng ProductId này
-
-                usedProductIds.Add(productId);
-
-                orderDetails.Add(new OrderDetail
-                {
-                    OrderId = order.Id,
-                    ProductId = productId,
-                    Quantity = new Random().Next(1, 10),
-                    UnitPrice = products.First(p => p.Id == productId).Price
-                });
-            }
-        }
-
-        modelBuilder.Entity<User>().HasData(users);
-        modelBuilder.Entity<Product>().HasData(products);
-        modelBuilder.Entity<Order>().HasData(orders);
-        modelBuilder.Entity<OrderDetail>().HasData(orderDetails);
+        modelBuilder.Entity<RentalDetail>().HasData(
+            new RentalDetail { RetalDetailID = 1, RentalID = 1, ComicBookID = 1, Quantity = 1, PricePerDay = 2.5M },
+            new RentalDetail { RetalDetailID = 2, RentalID = 1, ComicBookID = 2, Quantity = 3, PricePerDay = 1.5M }
+        );
     }
 }

@@ -3494,11 +3494,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lord_Hieu\\RiderProjects\\WebApplication3\\WebApplication3\\WebApplication3.csproj",
+      "projectUniqueName": "C:\\Users\\Lord_Hieu\\RiderProjects\\CSharp_ASM\\WebApplication3\\WebApplication3\\WebApplication3.csproj",
       "projectName": "WebApplication3",
-      "projectPath": "C:\\Users\\Lord_Hieu\\RiderProjects\\WebApplication3\\WebApplication3\\WebApplication3.csproj",
+      "projectPath": "C:\\Users\\Lord_Hieu\\RiderProjects\\CSharp_ASM\\WebApplication3\\WebApplication3\\WebApplication3.csproj",
       "packagesPath": "C:\\Users\\Lord_Hieu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lord_Hieu\\RiderProjects\\WebApplication3\\WebApplication3\\obj\\",
+      "outputPath": "C:\\Users\\Lord_Hieu\\RiderProjects\\CSharp_ASM\\WebApplication3\\WebApplication3\\obj\\",
       "projectStyle": "PackageReference",
       "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
